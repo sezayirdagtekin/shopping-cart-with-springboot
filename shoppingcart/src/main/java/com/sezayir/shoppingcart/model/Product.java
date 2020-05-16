@@ -1,15 +1,16 @@
 package com.sezayir.shoppingcart.model;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class Product {
 	
-	private long id;
+	private String  uuid;
 	private String title;
 	private BigDecimal price;
 	
-	public Product(long id, String title, BigDecimal price, Category category) {
-		this.id = id;
+	public Product(String title, BigDecimal price, Category category) {
+		this.uuid = UUID.randomUUID().toString();
 		this.title = title;
 		this.price = price;
 		this.category = category;
@@ -24,11 +25,11 @@ public class Product {
 		this.category = category;
 	}
 	
-	public long getId() {
-		return id;
+	public String getUuid() {
+		return uuid;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 	public String getTitle() {
 		return title;
