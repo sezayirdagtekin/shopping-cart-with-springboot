@@ -1,10 +1,13 @@
 package com.sezayir.shoppingcart.model;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 
  * @author user
  *
  */
+@Component
 public class ShoppingCartItem {
 	private int quantity;
 	private Product product;
