@@ -2,12 +2,17 @@ package com.sezayir.shoppingcart.model;
 
 import java.util.UUID;
 
+/**
+ * 
+ * @author sezayir
+ *
+ */
 public class Category {
 
 	private String uuid;
 	private String title;
 	private Category parent;
-	 
+
 	public Category(String title, Category parent) {
 		this.uuid = UUID.randomUUID().toString();
 		this.title = title;
