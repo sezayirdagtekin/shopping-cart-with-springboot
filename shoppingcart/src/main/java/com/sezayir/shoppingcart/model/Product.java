@@ -13,6 +13,7 @@ public class Product {
 	private String uuid;
 	private String title;
 	private BigDecimal price;
+	private Category category;
 
 	public Product(String title, BigDecimal price, Category category) {
 		this.uuid = UUID.randomUUID().toString();
@@ -20,8 +21,6 @@ public class Product {
 		this.price = price;
 		this.category = category;
 	}
-
-	private Category category;
 
 	public Category getCategory() {
 		return category;

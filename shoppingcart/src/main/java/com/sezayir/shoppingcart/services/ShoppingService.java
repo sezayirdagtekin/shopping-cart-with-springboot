@@ -9,6 +9,11 @@ import com.sezayir.shoppingcart.cart.ShoppingCart;
 import com.sezayir.shoppingcart.model.Product;
 import com.sezayir.shoppingcart.model.ShoppingCartItem;
 
+/**
+ * 
+ * @author sezayir
+ *
+ */
 @Service
 public class ShoppingService {
 	
