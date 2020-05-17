@@ -2,16 +2,23 @@ package com.sezayir.shoppingcart.model;
 
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 
  * @author sezayir
  *
  */
+@Component
 public class Category {
 
 	private String uuid;
 	private String title;
 	private Category parent;
+	
+	public Category() {
+		
+	}
 
 	public Category(String title, Category parent) {
 		this.uuid = UUID.randomUUID().toString();

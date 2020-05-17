@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sezayir.shoppingcart.campaign.Campaign;
 import com.sezayir.shoppingcart.controller.ShoppingCartController;
 import com.sezayir.shoppingcart.model.Product;
 import com.sezayir.shoppingcart.model.ShoppingCartItem;
@@ -24,6 +25,7 @@ public class ShoppingCart {
 	ShoppingCartItem shoppingCartItem;
 
 	private final List<ShoppingCartItem> items = new ArrayList<>();
+	private  List<ShoppingCartItem> discountedItems;
 	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
 	
 	public List<ShoppingCartItem> getItems() {
@@ -41,7 +43,16 @@ public class ShoppingCart {
 		shoppingCartItem.setQuantity(quantity);
 		items.add(shoppingCartItem);
 		logger.info(quantity +" " +product.getTitle()+ " from category " + product.getCategory().getTitle()+ " added to basket!");
-		
+
+	}
+
+	/**
+	 * 
+	 * @param campaign
+	 * @return
+	 */
+	public List<ShoppingCartItem> applyDiscounst(Campaign... campaign) {
+		return discountedItems;
 	}
 
 }

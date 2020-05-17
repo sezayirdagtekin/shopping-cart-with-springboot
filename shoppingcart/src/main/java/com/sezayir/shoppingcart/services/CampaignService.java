@@ -2,10 +2,14 @@ package com.sezayir.shoppingcart.services;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sezayir.shoppingcart.campaign.Campaign;
 import com.sezayir.shoppingcart.campaign.DiscountTypeEnum;
+import com.sezayir.shoppingcart.controller.ShoppingCartController;
 import com.sezayir.shoppingcart.model.Category;
 
 /**
@@ -17,6 +21,7 @@ import com.sezayir.shoppingcart.model.Category;
 public class CampaignService {
 
 	private HashMap<String, Campaign> campaignMap = new HashMap<>();
+	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
 
 	public void createCampaigns() {
 		Category food = new Category("Food", null);
@@ -30,7 +35,10 @@ public class CampaignService {
 		campaignMap.put("DSC%20", campaign1);
 		campaignMap.put("DSC%50", campaign2);
 		campaignMap.put("DSC-5TL", campaign3);
-
+		logger.info(campaign1.toString()+"is reated");
+		logger.info(campaign2.toString()+"is reated");
+		logger.info(campaign3.toString()+"is reated");
+	
 	}
 
 	public HashMap<String, Campaign> getCamapigns() {

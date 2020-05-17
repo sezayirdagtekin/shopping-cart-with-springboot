@@ -64,4 +64,11 @@ public class Campaign {
 		this.discountType = discountType;
 	}
 
+	@Override
+	public String toString() {
+		return "Campaign [category=" + category + ", numberOfItems=" + numberOfItems + ", dicountValue=" + dicountValue
+				+ ", discountType=" + discountType + "]";
+	}
+
+	
 }
