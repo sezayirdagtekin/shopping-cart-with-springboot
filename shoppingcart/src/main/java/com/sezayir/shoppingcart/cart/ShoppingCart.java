@@ -68,21 +68,23 @@ public class ShoppingCart {
 				if (RATE.equals(c.getDiscountType())) {
 					discountedItems.forEach(f -> {
 						if (f.getProduct().getCategory().equals(c.getCategory())) {
-							f.getProduct().setPrice(f.getProduct().getPrice().multiply(
-									BigDecimal.ONE.subtract(c.getDiscountValue().divide(new BigDecimal(100)))));
+							f.getProduct().setPrice(f.getProduct().getPrice().multiply(multiplierFactor(c)));
 						}
 					});
 
-				}
-			if (AMOUNT.equals(c.getDiscountType())) {
-				discountedItems
-						.forEach(f -> f.getProduct().setPrice(f.getProduct().getPrice().subtract(c.getDiscountValue())));
+				} else if (AMOUNT.equals(c.getDiscountType())) {
+					discountedItems.forEach(
+							f -> f.getProduct().setPrice(f.getProduct().getPrice().subtract(c.getDiscountValue())));
 
-			}
+				}
 		}
 
 		return discountedItems;
 
+	}
+
+	private BigDecimal multiplierFactor(Campaign c) {
+		return BigDecimal.ONE.subtract(c.getDiscountValue().divide(new BigDecimal(100.0)));
 	}
 
 }
