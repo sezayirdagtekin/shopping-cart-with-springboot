@@ -27,9 +27,9 @@ public class ShoppingService {
 		return shoppingCart.getItems();
 	}
 
-	public List<ShoppingCartItem> applyDiscounst(Campaign... campaign) {
+	public List<ShoppingCartItem> applyDiscount(Campaign... campaign) {
 		
-		return shoppingCart.applyDiscounst(campaign);
+		return shoppingCart.applyDiscount(campaign);
 	
 	}
 

@@ -51,7 +51,7 @@ public class ShoppingCartController {
 		shoppingService.addItems(product2, 4);
 		
 		Product product3 = new Product("Java Fundamentels", new BigDecimal(100.00), category2);
-		shoppingService.addItems(product3, 6);
+		shoppingService.addItems(product3, 1);
 		
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
@@ -64,7 +64,7 @@ public class ShoppingCartController {
 		HashMap<String, Campaign> campaignMap = campaignService.getCamapigns();
 		Campaign campaign1 = campaignMap.get("DSC%20");
 		Campaign campaign2 = campaignMap.get("DSC%50");
-		List<ShoppingCartItem> discount=shoppingService.applyDiscounst(campaign1, campaign2);
+		List<ShoppingCartItem> discount=shoppingService.applyDiscount(campaign1, campaign2);
 		return new ResponseEntity<List<ShoppingCartItem>>(discount, HttpStatus.OK);
 	}
 

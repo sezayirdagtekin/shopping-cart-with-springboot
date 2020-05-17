@@ -13,26 +13,26 @@ public class Campaign {
 
 	private Category category;
 	private int numberOfItems;
-	private BigDecimal dicountValue;
+	private BigDecimal discountValue;
 	private DiscountTypeEnum discountType;
 
 	public Campaign() {
 
 	}
 
-	public Campaign(Category category, int numberOfItems, BigDecimal dicountValue, DiscountTypeEnum discountType) {
+	public Campaign(Category category, int numberOfItems, BigDecimal discountValue, DiscountTypeEnum discountType) {
 		this.category = category;
 		this.numberOfItems = numberOfItems;
-		this.dicountValue = dicountValue;
+		this.discountValue = discountValue;
 		this.discountType = discountType;
 	}
 
-	public BigDecimal getDicountValue() {
-		return dicountValue;
+	public BigDecimal getDiscountValue() {
+		return discountValue;
 	}
 
-	public void setDicountValue(BigDecimal dicountValue) {
-		this.dicountValue = dicountValue;
+	public void setDiscountValue(BigDecimal discountValue) {
+		this.discountValue = discountValue;
 	}
 
 	public Category getCategory() {
@@ -61,7 +61,7 @@ public class Campaign {
 
 	@Override
 	public String toString() {
-		return "Campaign [category=" + category + ", numberOfItems=" + numberOfItems + ", dicountValue=" + dicountValue
+		return "Campaign [category=" + category + ", numberOfItems=" + numberOfItems + ", dicountValue=" + discountValue
 				+ ", discountType=" + discountType + "]";
 	}
 

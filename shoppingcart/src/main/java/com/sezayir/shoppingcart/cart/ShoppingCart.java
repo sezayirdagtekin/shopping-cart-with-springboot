@@ -1,5 +1,6 @@
 package com.sezayir.shoppingcart.cart;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,12 @@ import com.sezayir.shoppingcart.controller.ShoppingCartController;
 import com.sezayir.shoppingcart.model.Category;
 import com.sezayir.shoppingcart.model.Product;
 import com.sezayir.shoppingcart.model.ShoppingCartItem;
+import static com.sezayir.shoppingcart.campaign.DiscountTypeEnum.AMOUNT;
+import static com.sezayir.shoppingcart.campaign.DiscountTypeEnum.RATE;
 
 /**
  * O
+ * 
  * @author sezayir
  *
  */
@@ -24,13 +28,12 @@ public class ShoppingCart {
 	ShoppingCartItem shoppingCartItem;
 
 	private final List<ShoppingCartItem> items = new ArrayList<>();
-	private  List<ShoppingCartItem> discountedItems;
+	private List<ShoppingCartItem> discountedItems;
 	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
-	
+
 	public List<ShoppingCartItem> getItems() {
 		return items;
 	}
-
 
 	/**
 	 * 
@@ -42,7 +45,8 @@ public class ShoppingCart {
 		shoppingCartItem.setProduct(product);
 		shoppingCartItem.setQuantity(quantity);
 		items.add(shoppingCartItem);
-		logger.info(quantity +" " +product.getTitle()+ " from category " + product.getCategory().getTitle()+ " added to basket!");
+		logger.info(quantity + " " + product.getTitle() + " from category " + product.getCategory().getTitle()
+				+ " added to basket!");
 
 	}
 
@@ -51,17 +55,34 @@ public class ShoppingCart {
 	 * @param campaign
 	 * @return
 	 */
-	public List<ShoppingCartItem> applyDiscounst(Campaign... campaign) {
-		
-		Map<Category, List<Product>> categoryProducts = getItems().stream().map(s -> s.getProduct())
-				.collect(Collectors.groupingBy(Product::getCategory));
-		/*
-		  for (Campaign c: campaign) {
-	            System.out.print(c.getDicountValue() + " "); 
-	    } 
-		*/
-		return discountedItems;
-	}
+	public List<ShoppingCartItem> applyDiscount(Campaign... campaign) {
 
+		Map<Category, Integer> map = getItems().stream().collect(
+				Collectors.groupingBy(s -> s.getProduct().getCategory(), Collectors.summingInt(s -> s.getQuantity())));
+
+		discountedItems = getItems();
+
+		for (Campaign c : campaign) {
+			Integer totalNumberOfProductInCategory = map.get(c.getCategory());
+			if (totalNumberOfProductInCategory != null && totalNumberOfProductInCategory >= c.getNumberOfItems())
+				if (RATE.equals(c.getDiscountType())) {
+					discountedItems.forEach(f -> {
+						if (f.getProduct().getCategory().equals(c.getCategory())) {
+							f.getProduct().setPrice(f.getProduct().getPrice().multiply(
+									BigDecimal.ONE.subtract(c.getDiscountValue().divide(new BigDecimal(100)))));
+						}
+					});
+
+				}
+			if (AMOUNT.equals(c.getDiscountType())) {
+				discountedItems
+						.forEach(f -> f.getProduct().setPrice(f.getProduct().getPrice().subtract(c.getDiscountValue())));
+
+			}
+		}
+
+		return discountedItems;
+
+	}
 
 }
