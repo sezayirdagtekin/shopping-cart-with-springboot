@@ -18,6 +18,7 @@ import com.sezayir.shoppingcart.model.Product;
 import com.sezayir.shoppingcart.model.ShoppingCartItem;
 import com.sezayir.shoppingcart.services.CampaignService;
 import com.sezayir.shoppingcart.services.ShoppingService;
+import static com.sezayir.shoppingcart.util.Constants.ELECTRONIC;
 
 @RestController
 @RequestMapping("/basket")
@@ -40,9 +41,9 @@ public class ShoppingCartController {
 	@RequestMapping("/add")
 	public ResponseEntity<Product> addBasketItems() {
 		logger.info("addBasketItems end point is called...");
-		Category category = new Category("Elecktronic", null);
+		Category category = new Category(ELECTRONIC, null);
 		Product product = new Product("Printer", new BigDecimal(250.00), category);
-		shoppingService.addItems(product, 2);
+		shoppingService.addItems(product, 3);
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 	}
 
