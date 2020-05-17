@@ -1,18 +1,13 @@
 package com.sezayir.shoppingcart.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 /**
  * 
  * @author sezayir
  *
  */
-@Component
 public class ShoppingCartItem {
 	private int quantity;
 
-	@Autowired
 	private Product product;
 
 	public ShoppingCartItem() {

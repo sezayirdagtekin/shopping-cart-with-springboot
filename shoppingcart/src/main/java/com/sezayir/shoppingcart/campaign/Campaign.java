@@ -2,9 +2,6 @@ package com.sezayir.shoppingcart.campaign;
 
 import java.math.BigDecimal;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.sezayir.shoppingcart.model.Category;
 
 /**
@@ -12,10 +9,8 @@ import com.sezayir.shoppingcart.model.Category;
  * @author sezayir
  *
  */
-@Component
 public class Campaign {
 
-	@Autowired
 	private Category category;
 	private int numberOfItems;
 	private BigDecimal dicountValue;

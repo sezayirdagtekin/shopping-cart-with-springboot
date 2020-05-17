@@ -3,15 +3,10 @@ package com.sezayir.shoppingcart.cart;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.sezayir.shoppingcart.campaign.Campaign;
 import com.sezayir.shoppingcart.controller.ShoppingCartController;
 import com.sezayir.shoppingcart.model.Category;
@@ -19,14 +14,13 @@ import com.sezayir.shoppingcart.model.Product;
 import com.sezayir.shoppingcart.model.ShoppingCartItem;
 
 /**
- * 
+ * O
  * @author sezayir
  *
  */
 @Component
 public class ShoppingCart {
 
-	@Autowired
 	ShoppingCartItem shoppingCartItem;
 
 	private final List<ShoppingCartItem> items = new ArrayList<>();
@@ -44,6 +38,7 @@ public class ShoppingCart {
 	 * @param quantity
 	 */
 	public void addItems(Product product, int quantity) {
+		ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
 		shoppingCartItem.setProduct(product);
 		shoppingCartItem.setQuantity(quantity);
 		items.add(shoppingCartItem);

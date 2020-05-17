@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @author sezayir
  *
  */
-@Component
+
 public class Product {
 
 	private String uuid;

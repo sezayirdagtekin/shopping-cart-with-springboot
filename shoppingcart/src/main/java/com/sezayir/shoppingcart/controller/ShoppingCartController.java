@@ -32,29 +32,23 @@ public class ShoppingCartController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
 
-	@RequestMapping("/items")
+	@RequestMapping("/list")
 	public ResponseEntity<List<ShoppingCartItem>> getBasketItems() {
 		logger.info("getBasketItems end point is called...");
 		return new ResponseEntity<List<ShoppingCartItem>>(shoppingService.getItems(), HttpStatus.OK);
 	}
 
 	@RequestMapping("/add")
-	public ResponseEntity<Product> addBasketItems() {
+	public ResponseEntity<String> addBasketItems() {
 		logger.info("addBasketItems end point is called...");
 		Category category = new Category(ELECTRONIC, null);
 		Product product1 = new Product("Printer", new BigDecimal(250.00), category);
 		shoppingService.addItems(product1, 3);
 		
-		Product product2 = new Product("Tv", new BigDecimal(250.00), category);
+		Product product2 = new Product("Samsung TV", new BigDecimal(250.00), category);
 		shoppingService.addItems(product2, 4);
 		
-		return new ResponseEntity<Product>(product2, HttpStatus.OK);
-	}
-
-	@RequestMapping("/createcampaing")
-	public ResponseEntity<Object> createCampaing() {
-		logger.info("createcampaing end point is called...");
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	

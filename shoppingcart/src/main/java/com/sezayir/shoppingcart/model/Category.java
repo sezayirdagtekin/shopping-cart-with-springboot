@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @author sezayir
  *
  */
-@Component
 public class Category {
 
 	private String uuid;
