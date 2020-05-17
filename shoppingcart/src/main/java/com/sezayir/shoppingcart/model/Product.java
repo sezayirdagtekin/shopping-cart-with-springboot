@@ -3,17 +3,24 @@ package com.sezayir.shoppingcart.model;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 
  * @author sezayir
  *
  */
+@Component
 public class Product {
 
 	private String uuid;
 	private String title;
 	private BigDecimal price;
 	private Category category;
+
+	public Product() {
+
+	}
 
 	public Product(String title, BigDecimal price, Category category) {
 		this.uuid = UUID.randomUUID().toString();

@@ -2,6 +2,10 @@ package com.sezayir.shoppingcart.cart;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.sezayir.shoppingcart.campaign.Campaign;
 import com.sezayir.shoppingcart.controller.ShoppingCartController;
+import com.sezayir.shoppingcart.model.Category;
 import com.sezayir.shoppingcart.model.Product;
 import com.sezayir.shoppingcart.model.ShoppingCartItem;
 
@@ -52,7 +57,18 @@ public class ShoppingCart {
 	 * @return
 	 */
 	public List<ShoppingCartItem> applyDiscounst(Campaign... campaign) {
+
+		items.stream() .collect(Collectors.groupingBy(ShoppingCartItem::getProduct ));
+
+		/*
+		  for (Campaign c: campaign) {
+	            System.out.print(c.getDicountValue() + " "); 
+	    } 
+		*/
 		return discountedItems;
 	}
 
+	public static <T,K> Collector<T,?,Map<K,List<T>>>  groupingBy(Function<? super T,? extends K> classifier) {
+		return null;
+	}
 }
