@@ -57,9 +57,9 @@ public class ShoppingCart {
 	 * @return
 	 */
 	public List<ShoppingCartItem> applyDiscounst(Campaign... campaign) {
-
-		items.stream() .collect(Collectors.groupingBy(ShoppingCartItem::getProduct ));
-
+		
+		Map<Category, List<Product>> categoryProducts = getItems().stream().map(s -> s.getProduct())
+				.collect(Collectors.groupingBy(Product::getCategory));
 		/*
 		  for (Campaign c: campaign) {
 	            System.out.print(c.getDicountValue() + " "); 
@@ -68,7 +68,5 @@ public class ShoppingCart {
 		return discountedItems;
 	}
 
-	public static <T,K> Collector<T,?,Map<K,List<T>>>  groupingBy(Function<? super T,? extends K> classifier) {
-		return null;
-	}
+
 }

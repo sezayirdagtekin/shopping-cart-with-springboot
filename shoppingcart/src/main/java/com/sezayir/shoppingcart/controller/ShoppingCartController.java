@@ -42,9 +42,13 @@ public class ShoppingCartController {
 	public ResponseEntity<Product> addBasketItems() {
 		logger.info("addBasketItems end point is called...");
 		Category category = new Category(ELECTRONIC, null);
-		Product product = new Product("Printer", new BigDecimal(250.00), category);
-		shoppingService.addItems(product, 3);
-		return new ResponseEntity<Product>(product, HttpStatus.OK);
+		Product product1 = new Product("Printer", new BigDecimal(250.00), category);
+		shoppingService.addItems(product1, 3);
+		
+		Product product2 = new Product("Tv", new BigDecimal(250.00), category);
+		shoppingService.addItems(product2, 4);
+		
+		return new ResponseEntity<Product>(product2, HttpStatus.OK);
 	}
 
 	@RequestMapping("/createcampaing")
