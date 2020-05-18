@@ -38,4 +38,9 @@ public class ShoppingService {
 		shoppingCart.applyCoupon(coupon);
 	}
 
+	public void calculateDeliveryCost() {
+		shoppingCart.calculateDeliveryCost();
+		
+	}
+
 }

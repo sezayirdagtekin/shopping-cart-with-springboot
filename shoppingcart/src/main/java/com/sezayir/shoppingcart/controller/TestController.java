@@ -64,6 +64,8 @@ public class TestController {
 		//Apply coupon
 		Coupon coupon=couponService.getCoupon();
 		shoppingService.applyCoupon(coupon);
+		shoppingService.calculateDeliveryCost();
+		
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 

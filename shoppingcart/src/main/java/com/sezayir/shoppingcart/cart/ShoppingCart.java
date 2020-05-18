@@ -1,21 +1,24 @@
 package com.sezayir.shoppingcart.cart;
 
+import static com.sezayir.shoppingcart.campaign.DiscountTypeEnum.AMOUNT;
+import static com.sezayir.shoppingcart.campaign.DiscountTypeEnum.RATE;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import com.sezayir.shoppingcart.campaign.Campaign;
 import com.sezayir.shoppingcart.controller.ShoppingCartController;
+import com.sezayir.shoppingcart.delivery.DeliverCostCalulator;
 import com.sezayir.shoppingcart.model.Category;
 import com.sezayir.shoppingcart.model.Coupon;
 import com.sezayir.shoppingcart.model.Product;
 import com.sezayir.shoppingcart.model.ShoppingCartItem;
-import static com.sezayir.shoppingcart.campaign.DiscountTypeEnum.AMOUNT;
-import static com.sezayir.shoppingcart.campaign.DiscountTypeEnum.RATE;
 
 /**
  * O
@@ -41,7 +44,6 @@ public class ShoppingCart {
 		return discountedItems;
 	}
 
-
 	/**
 	 * 
 	 * @param product
@@ -52,8 +54,7 @@ public class ShoppingCart {
 		shoppingCartItem.setProduct(product);
 		shoppingCartItem.setQuantity(quantity);
 		items.add(shoppingCartItem);
-		logger.info(quantity + " " + product.getTitle() + " from category " + product.getCategory().getTitle()
-				+ " added to basket!");
+		logger.info(quantity + " " + product.getTitle() + " from category " + product.getCategory().getTitle()+ " added to basket!");
 
 	}
 
@@ -96,14 +97,20 @@ public class ShoppingCart {
 
 	public void applyCoupon(Coupon coupon) {
 
-		List<ShoppingCartItem> cart=	getDiscountedItems();
-		totalAmount =cart.stream() .map(s -> s.getProduct().getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
-		if(totalAmount.compareTo(coupon.getMinAmount())>0) {
-		    logger.info("Before coupon applied total is:"+totalAmount);
-			totalAmount=totalAmount.multiply(BigDecimal.ONE.subtract(coupon.getDiscountRate().divide(new BigDecimal(100.0))));
-		    logger.info("After coupon applied total is:"+totalAmount);
+		List<ShoppingCartItem> cart = getDiscountedItems();
+		totalAmount = cart.stream().map(s -> s.getProduct().getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
+		if (totalAmount.compareTo(coupon.getMinAmount()) > 0) {
+			logger.info("Before coupon applied total is:" + totalAmount);
+			totalAmount = totalAmount.multiply(BigDecimal.ONE.subtract(coupon.getDiscountRate().divide(new BigDecimal(100.0))));
+			logger.info("After coupon applied total is:" + totalAmount);
 		}
-		
+	}
+
+	public void calculateDeliveryCost() {
+		DeliverCostCalulator cal = new DeliverCostCalulator(new BigDecimal(10.0), new BigDecimal(5.0),
+				new BigDecimal(2.0));
+		BigDecimal totalDeliveryCost = cal.calculate(this);
+		logger.info("Total delivery cost is:" + totalDeliveryCost);
 	}
 
 }
