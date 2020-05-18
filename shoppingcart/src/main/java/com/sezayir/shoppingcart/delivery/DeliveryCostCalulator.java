@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import com.sezayir.shoppingcart.cart.ShoppingCart;
 import com.sezayir.shoppingcart.model.Product;
 
-public class DeliverCostCalulator {
+public class DeliveryCostCalulator {
 
 	private BigDecimal costPerProduct;
 	private BigDecimal costPerDelivery;
@@ -35,7 +35,7 @@ public class DeliverCostCalulator {
 		this.fixedCost = fixedCost;
 	}
 
-	public DeliverCostCalulator(BigDecimal costPerProduct, BigDecimal costPerDelivery, BigDecimal fixedCost) {
+	public DeliveryCostCalulator(BigDecimal costPerProduct, BigDecimal costPerDelivery, BigDecimal fixedCost) {
 		this.costPerProduct = costPerProduct;
 		this.costPerDelivery = costPerDelivery;
 		this.fixedCost = fixedCost;
@@ -45,10 +45,10 @@ public class DeliverCostCalulator {
 		int numberOfDeliveries = cart.getItems().stream().map(s -> s.getProduct())
 				.collect(Collectors.groupingBy(Product::getCategory, Collectors.counting())).size();
 		
-		Long numOfProducts = cart.getItems().stream().map(s -> s.getProduct()).collect(Collectors.counting());
+		Long numberOfProducts = cart.getItems().stream().map(s -> s.getProduct()).collect(Collectors.counting());
 		
 		BigDecimal amountCostPerDelivery = this.getCostPerDelivery().multiply(new BigDecimal(numberOfDeliveries));
-		BigDecimal amountCostPerProduct = this.getCostPerProduct().multiply(new BigDecimal(numOfProducts));
+		BigDecimal amountCostPerProduct = this.getCostPerProduct().multiply(new BigDecimal(numberOfProducts));
 		
 		return amountCostPerDelivery.add(amountCostPerProduct).add(this.getFixedCost());
 

@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import com.sezayir.shoppingcart.campaign.Campaign;
 import com.sezayir.shoppingcart.controller.ShoppingCartController;
-import com.sezayir.shoppingcart.delivery.DeliverCostCalulator;
+import com.sezayir.shoppingcart.delivery.DeliveryCostCalulator;
 import com.sezayir.shoppingcart.model.Category;
 import com.sezayir.shoppingcart.model.Coupon;
 import com.sezayir.shoppingcart.model.Product;
@@ -107,9 +107,9 @@ public class ShoppingCart {
 	}
 
 	public void calculateDeliveryCost() {
-		DeliverCostCalulator cal = new DeliverCostCalulator(new BigDecimal(10.0), new BigDecimal(5.0),
+		DeliveryCostCalulator deliveryCostCalulator = new DeliveryCostCalulator(new BigDecimal(10.0), new BigDecimal(5.0),
 				new BigDecimal(2.0));
-		BigDecimal totalDeliveryCost = cal.calculate(this);
+		BigDecimal totalDeliveryCost = deliveryCostCalulator.calculate(this);
 		logger.info("Total delivery cost is:" + totalDeliveryCost);
 	}
 
