@@ -1,0 +1,25 @@
+
+2020-05-18 23:22:59.208  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.TestController          : -------------------START SHOPPING-------------------------
+2020-05-18 23:22:59.208  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : 5 Printer from category Electronic added to basket!
+2020-05-18 23:22:59.208  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : 4 Samsung TV from category Electronic added to basket!
+2020-05-18 23:22:59.208  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : 1 Java Fundamentels from category Book added to basket!
+2020-05-18 23:22:59.208  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : 3 Campaigs are created
+2020-05-18 23:22:59.208  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Campaign [category=Category [title=Electronic], numberOfItems=3, dicountValue=20, discountType=RATE]
+2020-05-18 23:22:59.208  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Campaign [category=Category [title=Food], numberOfItems=5, dicountValue=50, discountType=RATE]
+2020-05-18 23:22:59.208  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Campaign [category=Category [title=Book], numberOfItems=2, dicountValue=5, discountType=AMOUNT]
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : -------------------Coupon Information---------------------
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Coupon [minAmount=100, discountRate=10, discountType=RATE]
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : ------------Category and Products-------------------------
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Category [title=Book]
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Product [name=Java Fundamentels, price=100]
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Category [title=Electronic]
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Product [name=Printer, price=250]
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Product [name=Samsung TV, price=500]
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : ------------Disounts--------------------------------------
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Total amount before campaign:850
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Campaign Discount  is:150.0
+2020-05-18 23:22:59.209  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Total price  after Campaign Discount is::700.0
+2020-05-18 23:22:59.210  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Coupon Discount  is:70.00
+2020-05-18 23:22:59.210  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : After Coupon apply  total cost is:630.00
+2020-05-18 23:22:59.210  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Delivery cost is:42
+2020-05-18 23:22:59.210  INFO 3464 --- [nio-8080-exec-4] c.s.s.controller.ShoppingCartController  : Total amount is:672.00
