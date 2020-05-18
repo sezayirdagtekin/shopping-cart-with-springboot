@@ -38,9 +38,10 @@ public class CampaignService {
 		campaignMap.put("DSC%20", campaign1);
 		campaignMap.put("DSC%50", campaign2);
 		campaignMap.put("DSC-5TL", campaign3);
-		logger.info(campaign1.toString()+"is reated");
-		logger.info(campaign2.toString()+"is reated");
-		logger.info(campaign3.toString()+"is reated");
+	    logger.info("3 Campaigs are created");
+		logger.info(campaign1.toString());
+		logger.info(campaign2.toString());
+		logger.info(campaign3.toString());
 	
 	}
 

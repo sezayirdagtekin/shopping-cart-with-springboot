@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
  */
 public class Category {
 
-	private String uuid;
 	private String title;
 	private Category parent;
 	
@@ -20,7 +19,6 @@ public class Category {
 	}
 
 	public Category(String title, Category parent) {
-		this.uuid = UUID.randomUUID().toString();
 		this.title = title;
 		this.parent = parent;
 	}
@@ -31,14 +29,6 @@ public class Category {
 
 	public void setParent(Category parent) {
 		this.parent = parent;
-	}
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
 	}
 
 	public String getTitle() {
@@ -73,5 +63,11 @@ public class Category {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [title=" + title + "]";
+	}
+	
 
 }

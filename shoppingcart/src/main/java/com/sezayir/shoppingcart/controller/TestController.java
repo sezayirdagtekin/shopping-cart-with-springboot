@@ -38,9 +38,9 @@ public class TestController {
 	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 
 
-	@RequestMapping("/generate")
+	@RequestMapping("/start")
 	public ResponseEntity<String> generate() {
-		logger.info("generare end point is called...");
+		logger.info("-------------------START SHOPPING-------------------------");
 		//Create Category
 		Category category1 = new Category(ELECTRONIC, null);
 		Category category2 = new Category(BOOK, null);
@@ -69,6 +69,13 @@ public class TestController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
+	
+	@RequestMapping("/print")
+	public ResponseEntity<Object> print() {
+		logger.info("print end point is called...");
+		shoppingService.print();
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
 
 
 

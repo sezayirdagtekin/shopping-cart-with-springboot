@@ -19,7 +19,7 @@ public class ShoppingService {
 
 	@Autowired
 	ShoppingCart shoppingCart;
-
+	
 	public void addItems(Product product, int quantity) {
 		shoppingCart.addItems(product, quantity);
 	}
@@ -31,7 +31,6 @@ public class ShoppingService {
 	public List<ShoppingCartItem> applyDiscount(Campaign... campaign) {
 		
 		return shoppingCart.applyDiscount(campaign);
-	
 	}
 	
 	public void applyCoupon(Coupon coupon) {
@@ -41,6 +40,10 @@ public class ShoppingService {
 	public void calculateDeliveryCost() {
 		shoppingCart.calculateDeliveryCost();
 		
+	}
+
+	public void print() {
+		shoppingCart.print();	
 	}
 
 }

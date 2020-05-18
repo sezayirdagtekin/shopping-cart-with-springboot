@@ -125,6 +125,8 @@ public class ShoppingCart {
 
 
 	public void applyCoupon(Coupon coupon) {
+		logger.info("-------------------Coupon Information---------------------");
+		logger.info(coupon.toString());
 		List<ShoppingCartItem> cart = getDiscountedItems();
 		BigDecimal totalAmountBefore = cart.stream().map(s -> s.getProduct().getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
 		if (totalAmountBefore.compareTo(coupon.getMinAmount()) > 0) {
@@ -144,6 +146,23 @@ public class ShoppingCart {
 	
 	private BigDecimal multiplierFactor(Campaign c) {
 		return BigDecimal.ONE.subtract(c.getDiscountValue().divide(new BigDecimal(100.0)));
+	}
+	public void print() {
+		
+		logger.info("------------Category and Products-------------------------");
+		Map<Category, List<Product>> map = getItems().stream().map(s -> s.getProduct())
+				.collect(Collectors.groupingBy(Product::getCategory));
+		map.forEach((k,v)->{
+			logger.info(k.toString());
+			v.forEach(o -> logger.info(o.toString()));
+			
+		});
+		logger.info("------------Disounts--------------------------------------");
+		logger.info("Campaign Discount  is:"+getCampaignDiscount());
+		logger.info("Total price  after Campaign Discount is::"+getTotalAmoutAfterDiscount());
+		logger.info("Delivery cost is:"+getDeliveryCost());
+	
+			
 	}
 
 

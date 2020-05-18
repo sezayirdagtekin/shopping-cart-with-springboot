@@ -36,4 +36,11 @@ public class Coupon {
 		this.discountType = discountType;
 	}
 
+	@Override
+	public String toString() {
+		return "Coupon [minAmount=" + minAmount + ", discountRate=" + discountRate + ", discountType=" + discountType
+				+ "]";
+	}
+	
+
 }

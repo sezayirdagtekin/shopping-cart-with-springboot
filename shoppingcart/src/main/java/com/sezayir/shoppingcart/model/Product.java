@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 public class Product {
 
-	private String uuid;
 	private String title;
 	private BigDecimal price;
 	private Category category;
@@ -23,7 +22,6 @@ public class Product {
 	}
 
 	public Product(String title, BigDecimal price, Category category) {
-		this.uuid = UUID.randomUUID().toString();
 		this.title = title;
 		this.price = price;
 		this.category = category;
@@ -35,14 +33,6 @@ public class Product {
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
 	}
 
 	public String getTitle() {
@@ -60,5 +50,11 @@ public class Product {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+
+	@Override
+	public String toString() {
+		return "Product [name=" + title + ", price=" + price + "]";
+	}
+	
 
 }
