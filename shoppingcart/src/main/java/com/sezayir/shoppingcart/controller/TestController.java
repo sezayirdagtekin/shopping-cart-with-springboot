@@ -41,6 +41,7 @@ public class TestController {
 	@RequestMapping("/start")
 	public ResponseEntity<String> generate() {
 		logger.info("-------------------START SHOPPING-------------------------");
+		shoppingService.clear();
 		//Create Category
 		Category category1 = new Category(ELECTRONIC, null);
 		Category category2 = new Category(BOOK, null);
@@ -66,17 +67,10 @@ public class TestController {
 		shoppingService.applyCoupon(coupon);
 		shoppingService.calculateDeliveryCost();
 		
+		shoppingService.print();
+		
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
-
-	
-	@RequestMapping("/print")
-	public ResponseEntity<Object> print() {
-		logger.info("print end point is called...");
-		shoppingService.print();
-		return new ResponseEntity<Object>(HttpStatus.OK);
-	}
-
 
 
 }

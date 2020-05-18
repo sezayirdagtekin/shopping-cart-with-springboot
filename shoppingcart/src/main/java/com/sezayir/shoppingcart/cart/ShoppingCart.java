@@ -28,11 +28,13 @@ public class ShoppingCart {
 
 	ShoppingCartItem shoppingCartItem;
 
+	private BigDecimal totalAmoutBeforeDiscount;
 	private BigDecimal totalAmoutAfterDiscount;
 	private BigDecimal couponDiscount;
+	private BigDecimal totalAmoutAfterCoupon;
 	private BigDecimal campaignDiscount;
 	private BigDecimal deliveryCost;
-	private List<ShoppingCartItem> discountedItems;
+	private List<ShoppingCartItem> discountedItems=  new ArrayList<>();
 	private final List<ShoppingCartItem> items = new ArrayList<>();
 	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
 
@@ -53,6 +55,18 @@ public class ShoppingCart {
 	}
 	public void setTotalAmoutAfterDiscount(BigDecimal totalAmoutAfterDiscount) {
 		this.totalAmoutAfterDiscount = totalAmoutAfterDiscount;
+	}
+	public BigDecimal getTotalAmoutBeforeDiscount() {
+		return totalAmoutBeforeDiscount;
+	}
+	public void setTotalAmoutBeforeDiscount(BigDecimal totalAmoutBeforeDiscount) {
+		this.totalAmoutBeforeDiscount = totalAmoutBeforeDiscount;
+	}
+	public BigDecimal getTotalAmoutAfterCoupon() {
+		return totalAmoutAfterCoupon;
+	}
+	public void setTotalAmoutAfterCoupon(BigDecimal totalAmoutAfterCoupon) {
+		this.totalAmoutAfterCoupon = totalAmoutAfterCoupon;
 	}
 	public BigDecimal getCouponDiscount() {
 		return couponDiscount;
@@ -78,6 +92,20 @@ public class ShoppingCart {
 	public void setDiscountedItems(List<ShoppingCartItem> discountedItems) {
 		this.discountedItems = discountedItems;
 	}
+	private void cloneItems() {
+		discountedItems = new ArrayList<>();
+		for(ShoppingCartItem o:getItems()) {
+			ShoppingCartItem d= new ShoppingCartItem();
+			Product p= new Product();
+			p.setCategory(o.getProduct().getCategory());
+			p.setPrice(o.getProduct().getPrice());
+			p.setTitle(o.getProduct().getTitle());
+			d.setQuantity(o.getQuantity());
+			d.setProduct(p);
+			discountedItems.add(d);
+		}
+	}
+
 
 	/**
 	 * 
@@ -101,7 +129,7 @@ public class ShoppingCart {
 	public List<ShoppingCartItem> applyDiscount(Campaign... campaign) {
 		Map<Category, Integer> map = getItems().stream().collect(
 				Collectors.groupingBy(s -> s.getProduct().getCategory(), Collectors.summingInt(s -> s.getQuantity())));
-		discountedItems = getItems();
+		cloneItems();
 		for (Campaign c : campaign) {
 			Integer totalNumberOfProductInCategory = map.get(c.getCategory());
 			if (totalNumberOfProductInCategory != null && totalNumberOfProductInCategory >= c.getNumberOfItems())
@@ -118,11 +146,11 @@ public class ShoppingCart {
 		}
 		BigDecimal amountBeforeCampaign = getItems().stream().map(s -> s.getProduct().getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
 		BigDecimal amountAfterCampaign = discountedItems.stream().map(s -> s.getProduct().getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
+		setTotalAmoutBeforeDiscount(amountBeforeCampaign);
 		setTotalAmoutAfterDiscount(amountAfterCampaign);
 		setCampaignDiscount(amountBeforeCampaign.subtract(amountAfterCampaign));
 		return discountedItems;
 	}
-
 
 	public void applyCoupon(Coupon coupon) {
 		logger.info("-------------------Coupon Information---------------------");
@@ -130,10 +158,11 @@ public class ShoppingCart {
 		List<ShoppingCartItem> cart = getDiscountedItems();
 		BigDecimal totalAmountBefore = cart.stream().map(s -> s.getProduct().getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
 		if (totalAmountBefore.compareTo(coupon.getMinAmount()) > 0) {
-			logger.info("Before coupon applied total is:" + totalAmountBefore);
+		//	logger.info("Before coupon applied total is:" + totalAmountBefore);
 			BigDecimal 	totalAmountAfter = totalAmountBefore.multiply(BigDecimal.ONE.subtract(coupon.getDiscountRate().divide(new BigDecimal(100.0))));
-			logger.info("After coupon applied total is:" + totalAmountAfter);
+		//	logger.info("After coupon applied total is:" + totalAmountAfter);
 			setCouponDiscount(totalAmountBefore.subtract(totalAmountAfter));
+			setTotalAmoutAfterCoupon(totalAmountAfter);
 		}
 	}
 
@@ -141,12 +170,13 @@ public class ShoppingCart {
 		DeliveryCostCalulator deliveryCostCalulator = new DeliveryCostCalulator(new BigDecimal(10.0),
 				new BigDecimal(5.0), new BigDecimal(2.0));
 		setDeliveryCost(deliveryCostCalulator.calculate(this));
-		logger.info("Total delivery cost is calculated:" + getDeliveryCost());
+		//logger.info("Total delivery cost is calculated:" + getDeliveryCost());
 	}
 	
 	private BigDecimal multiplierFactor(Campaign c) {
 		return BigDecimal.ONE.subtract(c.getDiscountValue().divide(new BigDecimal(100.0)));
 	}
+	
 	public void print() {
 		
 		logger.info("------------Category and Products-------------------------");
@@ -157,12 +187,21 @@ public class ShoppingCart {
 			v.forEach(o -> logger.info(o.toString()));
 			
 		});
+		
 		logger.info("------------Disounts--------------------------------------");
+		logger.info("Total amount before campaign:"+getTotalAmoutBeforeDiscount());
 		logger.info("Campaign Discount  is:"+getCampaignDiscount());
 		logger.info("Total price  after Campaign Discount is::"+getTotalAmoutAfterDiscount());
+		logger.info("Coupon Discount  is:"+getCouponDiscount());
+		logger.info("After Coupon apply  total cost is:"+getTotalAmoutAfterCoupon());
 		logger.info("Delivery cost is:"+getDeliveryCost());
+		logger.info("Total amount is:"+getTotalAmoutAfterCoupon().add(getDeliveryCost()));
 	
 			
+	}
+	public void clear() {
+		items.clear();
+		discountedItems.clear();		
 	}
 
 

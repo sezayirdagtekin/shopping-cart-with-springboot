@@ -46,4 +46,9 @@ public class ShoppingService {
 		shoppingCart.print();	
 	}
 
+	public void clear() {
+		shoppingCart.clear();	
+		
+	}
+
 }
