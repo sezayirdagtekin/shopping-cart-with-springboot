@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import com.sezayir.shoppingcart.campaign.Campaign;
 import com.sezayir.shoppingcart.controller.ShoppingCartController;
+import com.sezayir.shoppingcart.coupon.Coupon;
 import com.sezayir.shoppingcart.model.Category;
 import com.sezayir.shoppingcart.model.Product;
 import com.sezayir.shoppingcart.model.ShoppingCartItem;
@@ -85,6 +86,11 @@ public class ShoppingCart {
 
 	private BigDecimal multiplierFactor(Campaign c) {
 		return BigDecimal.ONE.subtract(c.getDiscountValue().divide(new BigDecimal(100.0)));
+	}
+
+	public void applyCoupon(Coupon coupon) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

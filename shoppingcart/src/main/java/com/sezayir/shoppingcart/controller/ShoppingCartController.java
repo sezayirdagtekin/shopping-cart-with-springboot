@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sezayir.shoppingcart.campaign.Campaign;
+import com.sezayir.shoppingcart.coupon.Coupon;
 import com.sezayir.shoppingcart.model.Category;
 import com.sezayir.shoppingcart.model.Product;
 import com.sezayir.shoppingcart.model.ShoppingCartItem;
 import com.sezayir.shoppingcart.services.CampaignService;
+import com.sezayir.shoppingcart.services.CouponService;
 import com.sezayir.shoppingcart.services.ShoppingService;
 import static com.sezayir.shoppingcart.util.Constants.ELECTRONIC;
 import static com.sezayir.shoppingcart.util.Constants.BOOK;;
@@ -30,6 +32,10 @@ public class ShoppingCartController {
 
 	@Autowired
 	CampaignService campaignService;
+	
+	@Autowired
+	CouponService couponService;
+	
 
 	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
 
@@ -66,6 +72,14 @@ public class ShoppingCartController {
 		Campaign campaign2 = campaignMap.get("DSC%50");
 		List<ShoppingCartItem> discount=shoppingService.applyDiscount(campaign1, campaign2);
 		return new ResponseEntity<List<ShoppingCartItem>>(discount, HttpStatus.OK);
+	}
+	
+	@RequestMapping("/applycoupon")
+	public ResponseEntity<Object> applycoupon() {
+		logger.info("applycoupon end point is called...");
+		Coupon coupon=couponService.getCoupon();
+		shoppingService.applyCoupon(coupon);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 }
