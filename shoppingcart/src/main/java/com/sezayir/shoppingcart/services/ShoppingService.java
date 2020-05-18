@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sezayir.shoppingcart.campaign.Campaign;
 import com.sezayir.shoppingcart.cart.ShoppingCart;
-import com.sezayir.shoppingcart.coupon.Coupon;
+import com.sezayir.shoppingcart.model.Coupon;
 import com.sezayir.shoppingcart.model.Product;
 import com.sezayir.shoppingcart.model.ShoppingCartItem;
 

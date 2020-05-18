@@ -7,7 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.sezayir.shoppingcart.coupon.Coupon;
+
+import com.sezayir.shoppingcart.model.Coupon;
 import com.sezayir.shoppingcart.services.CouponService;
 
 /**

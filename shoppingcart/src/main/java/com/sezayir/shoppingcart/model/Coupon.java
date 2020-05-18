@@ -1,4 +1,4 @@
-package com.sezayir.shoppingcart.coupon;
+package com.sezayir.shoppingcart.model;
 
 import java.math.BigDecimal;
 

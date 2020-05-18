@@ -3,7 +3,8 @@ package com.sezayir.shoppingcart.services;
 import static com.sezayir.shoppingcart.campaign.DiscountTypeEnum.RATE;
 import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
-import com.sezayir.shoppingcart.coupon.Coupon;
+
+import com.sezayir.shoppingcart.model.Coupon;
 
 /**
  * 
