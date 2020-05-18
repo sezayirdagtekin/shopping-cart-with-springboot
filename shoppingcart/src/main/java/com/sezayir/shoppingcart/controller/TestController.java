@@ -69,7 +69,7 @@ public class TestController {
 		
 		shoppingService.print();
 		
-		return new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<String>("Please follow the logs",HttpStatus.OK);
 	}
 
 
