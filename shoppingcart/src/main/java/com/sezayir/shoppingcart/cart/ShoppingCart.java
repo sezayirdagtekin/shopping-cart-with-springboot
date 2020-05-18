@@ -27,6 +27,7 @@ import static com.sezayir.shoppingcart.campaign.DiscountTypeEnum.RATE;
 public class ShoppingCart {
 
 	ShoppingCartItem shoppingCartItem;
+	private BigDecimal totalAmount;
 
 	private final List<ShoppingCartItem> items = new ArrayList<>();
 	private List<ShoppingCartItem> discountedItems;
@@ -35,6 +36,11 @@ public class ShoppingCart {
 	public List<ShoppingCartItem> getItems() {
 		return items;
 	}
+
+	public List<ShoppingCartItem> getDiscountedItems() {
+		return discountedItems;
+	}
+
 
 	/**
 	 * 
@@ -89,7 +95,14 @@ public class ShoppingCart {
 	}
 
 	public void applyCoupon(Coupon coupon) {
-		// TODO Auto-generated method stub
+
+		List<ShoppingCartItem> cart=	getDiscountedItems();
+		totalAmount =cart.stream() .map(s -> s.getProduct().getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
+		if(totalAmount.compareTo(coupon.getMinAmount())>0) {
+		    logger.info("Before coupon applied total is:"+totalAmount);
+			totalAmount=totalAmount.multiply(BigDecimal.ONE.subtract(coupon.getDiscountRate().divide(new BigDecimal(100.0))));
+		    logger.info("After coupon applied total is:"+totalAmount);
+		}
 		
 	}
 
